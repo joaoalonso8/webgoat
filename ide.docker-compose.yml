@@ -1,0 +1,6 @@
+version: '3'
+services:
+  php:
+    image: registry.rch.cloud/memberplus/rhel-magento:master
+    volumes:
+      - ../../../:/var/www/html:cached
