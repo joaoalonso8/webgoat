@@ -13,10 +13,26 @@ namespace OWASP.WebGoat.NET {
 	
 	public partial class ForgotPassword {
 		
-		protected System.Web.UI.WebControls.Content Content1;
+		protected System.Web.UI.WebControls.Content Content3;
 		
-		protected System.Web.UI.HtmlControls.HtmlGenericControl lblHeader;
+		protected System.Web.UI.WebControls.Panel PanelForgotPasswordStep1;
 		
-		protected System.Web.UI.WebControls.Content Content2;
+		protected System.Web.UI.WebControls.Literal labelMessage;
+		
+		protected System.Web.UI.WebControls.TextBox txtEmail;
+		
+		protected System.Web.UI.WebControls.Button ButtonCheckEmail;
+		
+		protected System.Web.UI.WebControls.Panel PanelForgotPasswordStep2;
+		
+		protected System.Web.UI.WebControls.Literal labelQuestion;
+		
+		protected System.Web.UI.WebControls.TextBox txtAnswer;
+		
+		protected System.Web.UI.WebControls.Button ButtonCheckAnswer;
+		
+		protected System.Web.UI.WebControls.Panel PanelForgotPasswordStep3;
+		
+		protected System.Web.UI.WebControls.Literal labelPassword;
 	}
 }

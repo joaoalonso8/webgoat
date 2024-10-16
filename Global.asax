@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="OWASP.WebGoat.NET.Global" Language="C#" %>
+<%@ Application Inherits="DotNetGoat.Global" %>
