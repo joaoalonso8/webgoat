@@ -1,0 +1,8 @@
+﻿<div class="col-md-12 col-sm-12 aon-eb-footer row">
+    <div class="col-xs-6">
+        <button ng-show="$ctrl.aonEbNavigationService.hasPreviousPage()" ng-click="$ctrl.aonEbNavigationService.previousPage()" class="btn btn-default btn-s-md pull-left">{{$ctrl.backButtonCaption}}</button>
+    </div>
+    <div class="col-xs-6">
+        <button ng-show="$ctrl.aonEbNavigationService.hasNextPage()" ng-click="$ctrl.aonEbNavigationService.nextPage()" class="btn btn-primary btn-s-md pull-right m-r-sm">{{$ctrl.nextButtonCaption}}</button>
+    </div>
+</div>

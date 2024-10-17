@@ -1,0 +1,20 @@
+﻿<div class="search-bar">
+    <div>
+        <button type="button" class="btn aon-eb-toolbar-btn fa fa-compress" ng-disabled="$ctrl.collapsed" ng-click="$ctrl.collapse()" uib-tooltip="{{$ctrl.collapseTooltip}}" tooltip-placement="bottom"></button>
+        <button type="button" class="btn aon-eb-toolbar-btn fa fa-expand" ng-disabled="!$ctrl.collapsed" ng-click="$ctrl.expand()" uib-tooltip="{{$ctrl.expandTooltip}}" tooltip-placement="bottom"></button>
+        <button type="button" class="btn aon-eb-toolbar-btn fas fa-bring-front" ng-show="$ctrl.showAll" ng-click="$ctrl.showAll()" uib-tooltip="{{$ctrl.showTooltip}}" tooltip-placement="bottom"></button>
+    </div>
+    <div class="input-group search-bar-icon">
+        <input class="aon-eb-filter-text search-bar-input" type="text" ng-model-options='{ debounce: 1000 }' ng-change="$ctrl.filter($ctrl.filterText, $ctrl.tree.dataSource)" placeholder="Search.." ng-model="$ctrl.filterText" />
+        <i ng-if="!$ctrl.textFiltered" class="aon-eb-icon-view search-icon"></i>
+        <i ng-if="$ctrl.textFiltered" class="aon-eb-icon-close search-icon" ng-click="$ctrl.clearSearch()"></i>
+    </div>
+    <div gi-loader loader-show-text="true" ng-show="$ctrl.loading"></div>
+    <div class="col-md-12 table-bordered aon-eb-dropdown-tree aon-eb-config-tree p-l-sm" ng-class="$ctrl.customizedCss"
+         kendo-tree-view="$ctrl.tree"
+         k-options="$ctrl.treeOptions"
+         k-ng-delay="$ctrl.treeOptions"
+         k-data-bound="$ctrl.onDataBound">
+    </div>
+</div>
+

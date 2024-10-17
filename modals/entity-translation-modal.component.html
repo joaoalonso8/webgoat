@@ -1,0 +1,27 @@
+﻿<div class="modal-header">
+    <button type="button" class="close btn-nostyle" ng-click="$ctrl.cancel();">x</button>
+    <h4 class="modal-title">{{::$ctrl.labels.heading}}</h4>
+</div>
+<div class="modal-body employee-record aon-eb-eoi-rule-review-modal" aon-eb-translator="$ctrl.entityType">
+    <div class="panel-default">
+        <div class="col-sm-12">
+            <div class="input-group">
+                <select class="form-control" ng-options="opt.LookupLanguage_RecordID as opt.LanguageName for opt in  $ctrl.localizationEntity | orderBy: 'LanguageName'" ng-model="$ctrl.selectedLanguage" ng-change="$ctrl.languageChange()">
+                    <option value="" selected>{{::$ctrl.labels.default}}</option>
+                </select>
+                <span class="input-group-btn" ng-if="$ctrl.enableSave"> <button class="btn btn-default btn-xs" ng-click="$ctrl.openLanguageModal()" aon-eb-translate="Add Language"> <i class="aon-eb-icon-add m-r-xs"></i>Add Language</button></span>
+            </div>
+        </div>
+        <br /> <br />
+        <div class="col-sm-12">
+            <aon-eb-alert-panel errors="$ctrl.saveErrors"></aon-eb-alert-panel>
+            <form name="$ctrl.formEntityEdit" novalidate>
+                <aon-eb-dynamic-form ng-if="!$ctrl.loading" disabled="!$ctrl.selectedLanguage || !$ctrl.enableSave" display-fields="$ctrl.fields" entity="$ctrl.dataRecord" hidden-fields="[]" columns="1"></aon-eb-dynamic-form>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="$ctrl.ok()" ng-if="$ctrl.enableSave" ng-disabled="$ctrl.formEntityEdit.$pristine || $ctrl.formEntityEdit.$invalid || $ctrl.isSaving">{{::$ctrl.labels.ok}}</button>
+    <button class="btn btn-default" ng-click="$ctrl.cancel()">{{::$ctrl.labels.cancel}}</button>
+</div>

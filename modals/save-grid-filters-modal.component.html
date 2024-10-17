@@ -1,0 +1,21 @@
+﻿<div class="modal-header" aon-eb-translator="$ctrl.translationEntity">
+    <button type="button" class="close btn-nostyle" ng-click="$ctrl.cancel();">x</button>
+    <h4 class="modal-title" aon-eb-translate="Save Filter">Save Filter</h4>
+</div>
+<div class="modal-body">
+    <form name="$ctrl.formEntityEdit" aon-eb-translator="$ctrl.translationEntity" novalidate>
+        <fieldset>
+            <aon-eb-form-group-vertical label="Name" required="true">
+                <aon-eb-input-string model="$ctrl.dataRecord.Name" required="true" on-change="$ctrl.change"></aon-eb-input-string>
+                <span ng-if="$ctrl.exists" class="text-danger">Name already exists</span>
+            </aon-eb-form-group-vertical>            
+            <aon-eb-form-group label="Set as default">
+                <aon-eb-input-boolean model="$ctrl.dataRecord.isDefaultFilter"></aon-eb-input-boolean>
+            </aon-eb-form-group>
+        </fieldset>
+    </form>
+</div>
+<div class="modal-footer" aon-eb-translator="$ctrl.translationEntity">
+    <button class="btn btn-primary" ng-click="$ctrl.ok()" aon-eb-translate="Save"  ng-disabled="$ctrl.exists || $ctrl.formEntityEdit.$pristine || $ctrl.formEntityEdit.$invalid">Save</button>
+    <button class="btn btn-default" ng-click="$ctrl.cancel()" aon-eb-translate="Cancel">Cancel</button>
+</div>

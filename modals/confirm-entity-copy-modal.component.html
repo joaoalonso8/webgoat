@@ -1,0 +1,23 @@
+﻿<div class="modal-header">
+    <button type="button" class="close btn-nostyle" ng-click="$ctrl.cancel();">x</button>
+    <h4 class="modal-title">{{::$ctrl.title}}</h4>
+</div>
+<div class="modal-body" ng-if="$ctrl.loaded">
+    <div>{{::$ctrl.text}}</div>
+    <br>
+    <form name="$ctrl.formEntityEdit" aon-eb-translator="$ctrl.translationEntity" novalidate>
+        <fieldset>
+            <div>{{::$ctrl.labels.copiedFrom}}: <b>{{::$ctrl.entity.Name}}</b></div><br />
+            <aon-eb-form-group-vertical label="{{::$ctrl.labels.name}}" required="true">
+                <aon-eb-input-text entity="$ctrl.dataRecord" property="'Name'" required="true"></aon-eb-input-text>
+            </aon-eb-form-group-vertical>
+            <aon-eb-form-group-vertical label="{{::$ctrl.labels.effective}}" required="true">
+                <aon-eb-input-date-only entity="$ctrl.dataRecord" property="'RecordEffective'" required="true" options="$ctrl.options"></aon-eb-input-date-only>
+            </aon-eb-form-group-vertical>
+        </fieldset>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="$ctrl.ok()" ng-disabled="$ctrl.formEntityEdit.$pristine || $ctrl.formEntityEdit.$invalid">{{::$ctrl.labels.ok}}</button>
+    <button class="btn btn-default" ng-click="$ctrl.cancel()">{{::$ctrl.labels.cancel}}</button>
+</div>

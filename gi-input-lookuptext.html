@@ -1,0 +1,15 @@
+﻿<div ng-class="{'input-group': showClear && giMaster !== undefined}">
+    <span class="input-group-btn" ng-if="giMaster !== undefined">
+        <button class="btn btn-default btn-icon" type="button" ng-click="giEntity[giProperty]=null;" ng-if="showClear(giProperty, giEntity)"><span class="fa fa-times"></span></button>
+        <button class="btn btn-default btn-icon disabled-with-tooltip" ng-if="!showClear(giProperty, giEntity) && showInherited(giProperty, giEntity, giMaster)" tooltip="Inherited from Parent"><span class="fa fa-share"></span></button>
+        <button class="btn btn-default btn-icon disabled" ng-if="!giFormControlText || giRequired"><span class="aon-eb-icon-share transparent"></span></button>
+    </span>
+    <div class="input-group input-group-unstyled">
+        <input type="text" class="form-control" readonly="readonly" value="{{findMasterValue()}}" ng-required="giRequired" ng-disabled="giBtnClickDisabled" />        
+        <span class="input-group-btn">
+            <button class="btn btn-default btn-icon" ng-click="giBtnClick()" ng-disabled="giBtnClickDisabled">
+                <span class="fa fa-search"></span>
+            </button>
+        </span>
+    </div>
+</div>

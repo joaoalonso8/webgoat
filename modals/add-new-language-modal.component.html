@@ -1,0 +1,17 @@
+﻿<div class="modal-header">
+    <button type="button" class="close btn-nostyle" ng-click="$ctrl.cancel();">x</button>
+    <h4 class="modal-title">{{::$ctrl.labels.heading}}</h4>
+</div>
+<div class="modal-body  employee-record">
+    <div class="panel-default">
+        <form name="$ctrl.formEntityEdit" aon-eb-translator="$ctrl.translationEntity" novalidate>          
+                <aon-eb-form-group-vertical label="Language">
+                    <aon-eb-input-fkey model="$ctrl.Entity_RecordID" selector="$ctrl.selector"></aon-eb-input-fkey>
+                </aon-eb-form-group-vertical>           
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="$ctrl.ok()" ng-disabled="$ctrl.formEntityEdit.$pristine || $ctrl.formEntityEdit.$invalid">{{::$ctrl.labels.ok}}</button>
+    <button class="btn btn-default" ng-click="$ctrl.cancel()">{{::$ctrl.labels.cancel}}</button>
+</div>

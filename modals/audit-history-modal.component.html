@@ -1,0 +1,22 @@
+﻿<div class="modal-header">
+    <button type="button" class="close btn-nostyle" ng-click="$ctrl.ok();">x</button>
+    <h4 class="modal-title">{{$ctrl.translator.translate('View Auditlog', 'View Auditlog')}}</h4>
+</div>
+<div class="modal-body" ng-if="$ctrl.loaded">
+    <div class="aon-eb-tab-strip pull-left">
+        <uib-tabset active="0">
+            <uib-tab index="0" heading="{{$ctrl.translator.translate('Audit Event', 'Audit Event')}}">
+                <aon-eb-grid id="auditEventsGrid" name="$ctrl.auditEventsGrid" options="$ctrl.eventsGridOptions" ng-if="$ctrl.eventsGridOptions"></aon-eb-grid>
+            </uib-tab>
+            <uib-tab index="1" heading="{{$ctrl.translator.translate('Audit Detail', 'Audit Detail')}}" disable="!$ctrl.selectedAuditEvent">
+                    <div class="col-md-12 panel-banner"><span class="label">{{$ctrl.selectedAuditEvent.AuditDate | aonEbDate :'G'}} - {{$ctrl.selectedAuditEvent.Name}} - {{$ctrl.selectedAuditEvent.Action}}</span></div>
+                    <div class="col-md-12">
+                        <aon-eb-grid id="auditPropertiesGrid" name="$ctrl.auditPropertiesGrid" options="$ctrl.propertiesGridOptions" ng-if="$ctrl.propertiesGridOptions"></aon-eb-grid>
+                    </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="$ctrl.ok()">{{$ctrl.okText}}</button>
+</div>

@@ -1,0 +1,48 @@
+﻿<div class="aon-eb-banner col-xs-12">
+    <div class="navbar-header">
+        <div class="tenant-name">{{::$ctrl.context.Tenant.Name}}</div>
+        <div class="pull-left" style="margin-left: 20px">
+            <div class="entity-title font-thin m-t-sm">{{::$ctrl.options.title}}</div>
+            <div class="page-title m-t-xxs font-thin">
+                <span ng-repeat="tc in $ctrl.pageContext.titleComponents track by $index">
+                    <span ng-bind="tc"></span>&nbsp;<span ng-if="!$last" class="fa fa-angle-right m-l-xs m-r-xs"></span>&nbsp;
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar-right m-r">
+        <ul class="nav navbar-nav">
+            <li ng-if="$ctrl.options.showTenantSwitcher" uib-tooltip="{{$ctrl.translator.translate('Switch Tenant', 'Switch Tenant')}}" tooltip-placement="bottom">
+                <div class="aon-eb-icon-change-tenant aon-eb-icon" ng-click="$ctrl.openTenantSwitcher()"></div>
+            </li>
+            <li ng-if="$ctrl.options.showMailbox" uib-tooltip="{{$ctrl.translator.translate('View Your Messages', 'View Your Messages')}}" tooltip-placement="bottom">
+                <div class="aon-eb-icon-view-messages aon-eb-icon" ng-click="$ctrl.openInboxModal()">
+                    <span class="badge badge-sm up bg-danger" ng-show="$ctrl.messageData.count > 0">{{$ctrl.messageData.count}}</span>
+                </div>
+            </li>
+            <li>
+                <div uib-dropdown>
+                    <a uib-dropdown-toggle>
+                        <span class="aon-eb-icon aon-eb-icon-view-user" uib-tooltip="{{$ctrl.translator.translate('View Your Details', 'View Your Details')}}" tooltip-placement="left"></span> 
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right"> 
+                        <li>
+                            <div class="user-profile" flex>
+                                <div layout="column" flex>
+                                    <div layout-padding>
+                                        <div class="tenant-name">
+                                            <span>{{::$ctrl.context.Tenant.Name}}</span>
+                                        </div>
+                                        <div>{{::$ctrl.context.User.FullName}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                </li>
+        </ul>
+    </div>    
+    <toaster-container></toaster-container>
+</div>

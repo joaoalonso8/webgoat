@@ -1,0 +1,6 @@
+﻿<div class="aon-eb-as-of-date">
+    <label class="label">{{::$ctrl.options.label}}</label>
+    <span>
+        <input id="effectiveAsOfDate" k-options="$ctrl.kOptions" k-rebind="$ctrl.kOptions" kendo-date-picker ng-change="$ctrl.onAsOfDateChange()" ng-disabled="$ctrl.disabled" ng-model="$ctrl.effectiveAsOfDate" ng-blur="$ctrl.blurAsOfDate()" gi-utc-date />
+    </span>
+</div>

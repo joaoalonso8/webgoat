@@ -1,0 +1,11 @@
+﻿<div class="modal-header">
+    <button type="button" class="close btn-nostyle" ng-click="cancel()">×</button>
+    <h4 class="modal-title" ng-bind="title"></h4>
+</div>
+<div class="modal-body">
+    <div ng-bind-html="text"></div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="ok()" ng-bind="okText"></button>
+    <button type="button" class="btn btn-default" ng-click="cancel()" ng-bind="cancelText" ng-show="isConfirm"></button>
+</div>

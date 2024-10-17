@@ -1,0 +1,10 @@
+﻿<div class="input-group range">
+    <span class="input-group-btn" ng-if="giMaster !== undefined">
+        <button class="btn btn-default btn-icon" type="button" ng-click="clearOverrides()" ng-if="showCancel(giEntity, giMin, giMax)" tooltip="Cancel Override"><span class="fa fa-times"></span></button>
+        <button class="btn btn-default btn-icon disabled-with-tooltip" type="button" ng-if="!showCancel(giEntity, giMin, giMax) && showInherited(giMaster, giEntity, giMin, giMax)" tooltip="Inherited from Parent"><span class="aon-eb-icon-share"></span></button>
+        <button class="btn btn-default btn-icon disabled" type="button" ng-if="!showCancel(giEntity, giMin, giMax) && !showInherited(giMaster, giEntity, giMin, giMax)"><span class="aon-eb-icon-share transparent"></span></button>
+    </span>
+    <input type="number" class="form-control" ng-model="giEntity[giMin]" placeholder="{{giMaster[giMin]}}">
+    <span class="input-group-addon">To:</span>
+    <input type="number" class="form-control" ng-model="giEntity[giMax]" placeholder="{{giMaster[giMax]}}">
+</div>
