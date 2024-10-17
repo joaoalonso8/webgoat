@@ -1,0 +1,112 @@
+﻿<form name="$ctrl.formEntityEdit" novalidate>
+    <div ng-if="!$ctrl.loading && !$ctrl.hideEntirePanel" class="employee-record">
+        <div class="panel-group accordion" aon-eb-translator="$ctrl.options.translationEntity">
+            <div class="panel panel-default">
+                <div class="panel-heading accordion-header main" ng-class="{'border-collapse': !$ctrl.expanded,'border-open': $ctrl.expanded}">
+                    <fieldset>
+                        <a class="panel-title" ng-click="$ctrl.expanded = $ctrl.options.collapsible ? !$ctrl.expanded : $ctrl.expanded">
+                            <i ng-if="::$ctrl.options.collapsible" class="fa" ng-class="{'aon-eb-icon-chevron-up': $ctrl.expanded, 'aon-eb-icon-chevron-down': !$ctrl.expanded}"></i>
+                            <h2 aon-eb-translate="{{$ctrl.options.title}}">{{$ctrl.options.title}}</h2>
+                        </a>
+                        <span class="paddingLeft50" ng-if="$ctrl.isEditable && $ctrl.options.type === 'employee'">
+                            <span class="label label-danger"><span>{{$ctrl.labels.effectiveDateMsg}}</span> {{$ctrl.effectiveDate | aonEbDate}}</span>
+                        </span>
+                        <span class="pull-right">
+                            <span ng-if="$ctrl.canLocalize">
+                                <button class="btn aon-eb-toolbar-btn aon-eb-icon-globe" ng-click="$ctrl.openEntityTranslate();" title="EntityTranslate" ng-disabled="$ctrl.dataRecord.RecordID==='NEW'"></button>
+                            </span>
+                            <span ng-if="$ctrl.canDelete && !$ctrl.isEditable">
+                                <button class="btn aon-eb-toolbar-btn aon-eb-icon-delete" ng-disabled="$ctrl.isDeleting" ng-click="$ctrl.delete()" title="Delete"></button>
+                            </span>
+                            <span ng-if="$ctrl.canEdit && !$ctrl.isEditable">
+                                <button class="btn aon-eb-toolbar-btn aon-eb-icon-edit" ng-disabled="!$ctrl.isLatest" ng-click="$ctrl.edit()" title="{{$ctrl.labels.Edit}}"></button>
+                            </span>
+                            <span ng-if="$ctrl.canEdit && $ctrl.isEditable">
+                                <button class="btn aon-eb-toolbar-btn aon-eb-icon-save" ng-disabled="$ctrl.formEntityEdit.$pristine || $ctrl.formEntityEdit.$invalid || $ctrl.isSaving" ng-click="$ctrl.save()" title="Save"></button>
+                                <button class="btn aon-eb-toolbar-btn aon-eb-icon-close" ng-disabled="$ctrl.isSaving" ng-click="$ctrl.cancel();" title="Cancel"></button>
+                            </span>
+                            <span ng-if="!$ctrl.canEdit && $ctrl.canClose">
+                                <button class="btn aon-eb-toolbar-btn aon-eb-icon-close" ng-click="$ctrl.close();" title="Close"></button>
+                            </span>
+                            <span ng-if="$ctrl.canAddBUGU">
+                                <button class="btn aon-eb-toolbar-btn aon-eb-icon-tag" ng-click="$ctrl.addOrRemoveBUGU();" title="{{$ctrl.labels.bugus}}" ng-disabled="$ctrl.dataRecord.RecordID==='NEW'"></button>
+                            </span>
+                            <span>
+                                <button class="btn aon-eb-toolbar-btn aon-eb-icon-history" ng-click="$ctrl.showAuditHistory();" title="{{$ctrl.labels.audit}}" ng-disabled="$ctrl.dataRecord.RecordID==='NEW'"></button>
+                            </span>
+                        </span>
+                    </fieldset>
+                </div>
+                <div class="panel-collapse border" uib-collapse="!$ctrl.expanded">
+                    <div class="col-md-12 panel-banner" ng-if="!$ctrl.isEditable">
+                        <span><button class="btn aon-eb-id-btn" ng-click="$ctrl.info();" title="Information">id</button></span>
+                        <span class="paddingRight50">
+                            <span>
+                                <span class="label">{{$ctrl.labels.modifiedOn}}</span>{{$ctrl.dataRecord.ModifiedOn | aonEbDate  :'G'}}
+                            </span>
+                            <span>
+                                <span class="label">{{$ctrl.labels.modifiedBy}}</span>{{$ctrl.dataRecord.ModifiedBy}}
+                            </span>
+                        </span>
+                        <span class="pull-right" ng-if="$ctrl.options.effectiveDated !== false">
+                            <span>
+                                <span class="label">{{$ctrl.labels.effective}}</span>{{$ctrl.dataRecord.RecordEffective | aonEbDate  :'d'}}
+                            </span>
+                            <span ng-if="$ctrl.dataRecord.RecordExpiration != undefined">
+                                <span class="label">{{$ctrl.labels.expiration}}</span>
+                                {{$ctrl.dataRecord.RecordExpiration | aonEbDate  :'d'}}
+                            </span>
+                            <span ng-if="$ctrl.options.readSequence != undefined && $ctrl.versionData.length >0">
+                                <span class="label">{{$ctrl.labels.version}}</span>
+                                <select title="{{$ctrl.labels.versionMsg}}" ng-options="opt.recordId as opt.version for opt in $ctrl.versionData |orderBy:'-recordSequence'" ng-disabled="$ctrl.versionData.length == 1"
+                                        ng-model="$ctrl.versionId" ng-change="$ctrl.switchVersion()"></select>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="col-md-12 panel-banner" ng-if="$ctrl.isEditable && $ctrl.options.type === 'config' && $ctrl.options.effectiveDated !== false">
+                        <span class="pull-right">
+                            <span>
+                                <span class="label required">{{$ctrl.labels.effective}}</span><input kendo-date-picker ng-model="$ctrl.dataRecord.RecordEffective" ng-change="$ctrl.effectiveChange()" k-options="$ctrl.kEffectiveDateOptions" k-rebind="$ctrl.kEffectiveDateOptions" required gi-max-date="{{$ctrl.dataRecord.RecordExpiration}}" gi-utc-date />
+                            </span>
+                            <span>
+                                <span class="label">{{$ctrl.labels.expiration}}</span><input kendo-date-picker ng-model="$ctrl.dataRecord.RecordExpiration" ng-change="$ctrl.expirationChange()" k-options="$ctrl.kExpirationDateOptions" k-rebind="$ctrl.kExpirationDateOptions" gi-min-date="{{$ctrl.dataRecord.RecordEffective}}" gi-utc-date />
+                            </span>
+                        </span>
+                    </div>
+                    <div class="panel-body border">
+                        <aon-eb-alert-panel errors="$ctrl.saveErrors"></aon-eb-alert-panel>
+                        <div class="row" ng-if="section.title == undefined">
+                            <div class="col-md-12 col-sm-12">
+                                <ng-transclude></ng-transclude>
+                            </div>
+                        </div>
+                        <div ng-repeat="section in $ctrl.options.sections">
+                            <div class="row" ng-if="section.title == undefined">
+                                <div class="col-md-12 col-sm-12">
+                                    <aon-eb-dynamic-form ng-repeat="panel in section.panels" display-fields="panel.fields" master="$ctrl.master" entity="$ctrl.dataRecord" hidden-fields="$ctrl.options.hiddenFields" columns="panel.columns" disabled="!$ctrl.isEditable || $ctrl.isSaving"></aon-eb-dynamic-form>
+                                </div>
+                            </div>
+                            <div ng-if="section.title != undefined">
+                                <div class="panel-group">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading accordion-header nested">
+                                            <a class="panel-title" ng-click="section.expanded = section.collapsible ? !section.expanded : section.expanded">
+                                                <i ng-if="::section.collapsible" class="fa" ng-class="{'aon-eb-icon-chevron-down': !section.expanded,'aon-eb-icon-chevron-up': section.expanded}"></i>
+                                                <h2 aon-eb-translate="{{section.title}}">{{section.title}}</h2>
+                                            </a>
+                                        </div>
+                                        <div class="panel-collapse" uib-collapse="!section.expanded">
+                                            <div class="col-md-12 col-sm-12 panel-bg">
+                                                <aon-eb-dynamic-form ng-repeat="panel in section.panels" display-fields="panel.fields" master="$ctrl.master" entity="$ctrl.dataRecord" hidden-fields="$ctrl.options.hiddenFields" columns="panel.columns" disabled="!$ctrl.isEditable || $ctrl.isSaving"></aon-eb-dynamic-form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

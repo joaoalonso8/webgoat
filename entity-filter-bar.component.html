@@ -1,0 +1,16 @@
+﻿<div gi-loader loader-show-text="true" ng-show="!$ctrl.loaded"></div>
+<div class="aon-eb-bugu-panel" ng-if="$ctrl.loaded">
+    <div class="aon-eb-bugu-panel-item" id="date">
+        <label class="label">{{::$ctrl.labels.ViewDate}}</label>
+        <input id="effectiveAsOfDate" k-options="$ctrl.kOptions" k-rebind="$ctrl.kOptions" kendo-date-picker ng-change="$ctrl.onAsOfDateChange()" ng-disabled="$ctrl.disabled || $ctrl.options.disabledDate" ng-model="$ctrl.effectiveAsOfDate" ng-blur="$ctrl.blurAsOfDate()" gi-utc-date />
+    </div>
+    <div class="aon-eb-bugu-panel-item" id="bu">
+        <label class="label">{{$ctrl.labels.BusinessUnit}}</label>
+        <aon-eb-input-dropdown-treeview ng-required="false" disabled="$ctrl.disabled || $ctrl.options.disabledBU" options="$ctrl.BusinessUnits" multi-select="false" model="$ctrl.BU" child-field="'BusinessUnits'"></aon-eb-input-dropdown-treeview>
+    </div>
+    <div class="aon-eb-bugu-panel-item" id="gu">
+        <label class="label">{{$ctrl.labels.GeographicUnit}}</label>
+        <aon-eb-input-dropdown-treeview ng-required="false" disabled="$ctrl.disabled || $ctrl.options.disabledGU" options="$ctrl.GeographicUnits" multi-select="false" model="$ctrl.GU" child-field="'GeographicUnits'"></aon-eb-input-dropdown-treeview>
+    </div>
+</div>
+
