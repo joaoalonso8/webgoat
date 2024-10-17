@@ -1,0 +1,18 @@
+﻿<div class="container-fluid primary-tabs">
+    <uib-tabset active="$ctrl.active" ng-if="$ctrl.menu" class="tab-content">
+        <uib-tab index="$index" select="$ctrl.toggle($event, $index)" ng-repeat="item1 in $ctrl.menu.items" ng-if="!item1.hidden" disable="!$ctrl.isMenuItemEnabled(item1)" class="{{$ctrl.selected === $index ? 'selected' : ''}}">
+            <uib-tab-heading>{{::item1.label}}</uib-tab-heading>
+            <div>
+                <div class="row aon-eb-menu">
+                    <div class="col-md-3 aon-eb-menu-category" ng-repeat="item2 in item1.items" ng-if="!item2.hidden" ng-class="{'disabled' : !$ctrl.isMenuItemEnabled(item2)}">
+                        <span ng-if="item2.label && !item2.state" ng-class="{'disabled' : !$ctrl.isMenuItemEnabled(item2)}">{{::item2.label}}</span>
+                        <a ng-if="item2.label && item2.state" ng-click="$ctrl.go(item2)" ng-class="{'disabled' : !$ctrl.isMenuItemEnabled(item2)}"><span>{{::item2.label}}</span></a>
+                        <ul class="nav nav-bar">
+                            <li ng-repeat="item3 in item2.items" ng-if="!item3.hidden"><a ng-click="$ctrl.go(item3)" ng-class="{'disabled' : !$ctrl.isMenuItemEnabled(item3)}"><span>{{::item3.label}}</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</div>

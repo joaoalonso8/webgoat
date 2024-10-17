@@ -1,0 +1,23 @@
+﻿<div class="modal-header">
+    <button type="button" class="close btn-nostyle" ng-click="$ctrl.cancel();">x</button>
+    <h4 class="modal-title">{{$ctrl.translator.translate('Confirmation Message', 'Confirmation Message')}}</h4>
+</div>
+<div class="modal-body">
+    <form name="modalForm" novalidate class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-12 pull-left">
+                <p>
+                    {{$ctrl.translator.translate('ConfirmationMessageText','ConfirmationMessageText')}} {{$ctrl.effectiveAsOfDate}}.
+                </p>
+                <p>
+                    <input name="doNotShowMessage" type="checkbox" ng-model="$ctrl.doNotShowMessage" />
+                <label for="doNotShowMessage" style="vertical-align:middle" gi-translate="DoNotShowThisMessageAgain" b-entity="$ctrl.translationEntity"></label>
+                </p>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="$ctrl.Ok()" gi-translate="OK" b-entity="$ctrl.translationEntity"></button>
+    <button class="btn btn-default" ng-click="$ctrl.cancel()" gi-translate="Cancel" b-entity="$ctrl.translationEntity"></button>
+</div>

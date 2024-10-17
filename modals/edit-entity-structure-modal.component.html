@@ -1,0 +1,62 @@
+﻿<div class="modal-header">
+    <button type="button" class="close btn-nostyle" ng-click="$ctrl.cancel();">x</button>
+    <h4 class="modal-title">{{$ctrl.translator.translate('Add/Remove Business and Geographic Unit', 'Add/Remove Business and Geographic Unit')}}</h4>
+</div>
+<div class="modal-body">
+    <form name="$ctrl.formEntityEdit" aon-eb-translator="$ctrl.translationEntity" novalidate>
+        <fieldset>
+            <div class="row">
+                <div class="col-sm-4">
+                    <aon-eb-form-group-vertical label="BU">
+
+                        <div class="dropdown-view" >
+                            <form class="form-horizontal" role="form" name="treeView">
+                                <input id="filterText" class="aon-eb-filter-text" type="text" placeholder="Type filter text" ng-model="$ctrl.filterBUText" ng-keyup="$ctrl.filter($ctrl.filterBUText.toLowerCase(), $ctrl.buTree.dataSource)" />
+                                <button class="btn aon-eb-toolbar-btn " ng-click="$ctrl.UncheckAllNodes($ctrl.buTree.dataSource.data(),'BU')">{{$ctrl.translator.translate('Clear Selections', 'Clear Selections')}}</button>
+                                <div class="col-md-12 table-bordered aon-eb-dropdown-tree"
+                                     kendo-tree-view="$ctrl.buTree"
+                                     k-options="$ctrl.buTreeOptions"
+                                     k-ng-delay="$ctrl.buTreeOptions"
+                                     k-on-check="$ctrl.buCheck(kendoEvent)"></div>
+                            </form>
+                        </div>
+                    </aon-eb-form-group-vertical>
+                </div>
+                <div class="col-sm-4">
+                    <aon-eb-form-group-vertical label="GU">
+                        <div class="dropdown-view">
+                            <form class="form-horizontal" role="form" name="treeView">
+                                <input id="filterText" class="aon-eb-filter-text" type="text" placeholder="Type filter text" ng-model="$ctrl.filterGUText" ng-keyup="$ctrl.filter($ctrl.filterGUText.toLowerCase(), $ctrl.guTree.dataSource)" />
+                                <button class="btn aon-eb-toolbar-btn" ng-click="$ctrl.UncheckAllNodes($ctrl.guTree.dataSource.data(),'GU')">{{$ctrl.translator.translate('Clear Selections', 'Clear Selections')}}</button>
+                                <div class="col-md-12 table-bordered aon-eb-dropdown-tree"
+                                     kendo-tree-view="$ctrl.guTree"
+                                     k-options="$ctrl.guTreeOptions"
+                                     k-ng-delay="$ctrl.guTreeOptions"
+                                     k-on-check="$ctrl.guCheck(kendoEvent)"></div>
+                            </form>
+                        </div>
+                    </aon-eb-form-group-vertical>
+                </div>
+                <div class="col-sm-4">
+                    <aon-eb-form-group-vertical label="Tag">
+                        <div class="dropdown-view">
+                            <form class="form-horizontal" role="form" name="treeView">
+                                <input id="filterText" class="aon-eb-filter-text" type="text" placeholder="Type filter text" ng-model="$ctrl.filterTagText" ng-keyup="$ctrl.filter($ctrl.filterTagText.toLowerCase(), $ctrl.tagTree.dataSource)" />
+                                <button class="btn aon-eb-toolbar-btn" ng-click="$ctrl.UncheckAllNodes($ctrl.tagTree.dataSource.data(),'Tag')">{{$ctrl.translator.translate('Clear Selections', 'Clear Selections')}}</button>
+                                <div class="col-md-12 table-bordered aon-eb-dropdown-tree"
+                                     kendo-tree-view="$ctrl.tagTree"
+                                     k-options="$ctrl.tagTreeOptions"
+                                     k-ng-delay="$ctrl.tagTreeOptions"
+                                     k-on-check="$ctrl.tagCheck(kendoEvent)"></div>
+                            </form>
+                        </div>
+                    </aon-eb-form-group-vertical>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="$ctrl.ok()">{{::$ctrl.okText}}</button>
+    <button class="btn btn-default" ng-click="$ctrl.cancel()">{{::$ctrl.cancelText}}</button>
+</div>
