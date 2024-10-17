@@ -1,0 +1,4 @@
+﻿<div>
+    <select class="form-control" ng-model="giEntity[giProperty]" ng-options="opt.RecordID as opt.Name {{giOptionsGroupBy}} for opt in ::giOptions | orderBy: giOptionsOrderBy" ng-required="::(giRequired)" ng-change="::(giChange())" ng-disabled="giDisabled">
+    </select>    
+</div>

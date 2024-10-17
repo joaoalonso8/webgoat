@@ -1,0 +1,73 @@
+﻿
+<fieldset ng-disabled="vm.disabled">
+    <div class="row">
+        <div ng-repeat="limit in vm.getLimits(vm.displayFields,vm.hiddenFields) track by $index" class="col-sm-{{::vm.colWidth}}">
+            <span ng-repeat="item in vm.visibleFields | limitTo : limit['Rows'] : limit['Start']">
+                <span ng-switch="::item.type.view">
+                    <span ng-switch-when="input">
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required" ng-if="item.disabled">
+                            <gi-input-text gi-entity="vm.entity" gi-property="item.property" gi-required="::item.required" gi-disabled="vm.disabled || vm.checkCondition(vm.entity,item.disabled)"></gi-input-text>
+                        </gi-form-group-vertical>
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required" ng-if="!item.disabled">
+                            <gi-input-text gi-entity="vm.entity" gi-property="item.property" gi-required="::item.required" gi-disabled="vm.disabled"></gi-input-text>
+                        </gi-form-group-vertical>
+                    </span>
+                    <span ng-switch-when="lengthInput">
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required">
+                            <input type="text" class="form-control" id="input{{::item.label}}" ng-model="vm.entity[item.property]" ng-required="::item.required" maxlength="{{::item.maxlength}}" ng-disabled="vm.disabled || vm.checkCondition(vm.entity,item.disabled)" />
+                        </gi-form-group-vertical>
+                    </span>
+                    <span ng-switch-when="numeric">
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required" ng-if="item.disabled">
+                            <gi-input-numeric-simple gi-entity="vm.entity" gi-property="item.property" gi-required="::item.required" gi-disabled="vm.disabled|| vm.checkCondition(vm.entity,item.disabled)"></gi-input-numeric-simple>
+                        </gi-form-group-vertical>
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required" ng-if="!item.disabled">
+                            <gi-input-numeric gi-entity="vm.entity" gi-property="item.property" gi-required="::item.required"></gi-input-numeric>
+                        </gi-form-group-vertical>
+                    </span>
+                    <span ng-switch-when="checkbox">
+                        <gi-form-group gi-label="{{::item.label}}" gi-label-cols="7" gi-input-cols="5">
+                            <gi-input-checkbox gi-entity="vm.entity" gi-property="item.property" gi-required="::item.required" gi-disabled="vm.disabled || vm.checkCondition(vm.entity,item.disabled)"></gi-input-checkbox>
+                        </gi-form-group>
+                    </span>
+                    <span ng-switch-when="textarea">
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required">
+                            <textarea class="form-control" id="input{{::item.label}}" ng-model="vm.entity[item.property]" maxlength="{{::item.maxlength}}" rows="{{::item.rows}}" ng-required="::item.required" ng-disabled="vm.disabled || vm.checkCondition(vm.entity,item.disabled)"></textarea>
+                        </gi-form-group-vertical>
+                    </span>
+                    <span ng-switch-when="select">
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required" ng-if="!item.selectType">
+                            <gi-input-dropdown-simple gi-entity="vm.entity" gi-options="item.type.model" gi-property="item.property" gi-required="::item.required" gi-change="vm.doClick(item.type.change)" gi-disabled="vm.disabled || vm.checkCondition(vm.entity,item.disabled)"></gi-input-dropdown-simple>
+                        </gi-form-group-vertical>
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required" ng-if="item.selectType">
+                            <gi-input-dropdown gi-entity="vm.entity" gi-options="item.type.model" gi-property="item.property" gi-required="::item.required" gi-change="vm.doClick(item.type.change)" gi-disabled="vm.disabled || vm.checkCondition(vm.entity,item.disabled)"></gi-input-dropdown>
+                        </gi-form-group-vertical>
+                    </span>
+                    <span ng-switch-when="inputselector">
+                        <gi-form-group-vertical gi-label="{{::item.label}}" ng-if="vm.checkCondition(vm.entity,item.type.condition)">
+                            <gi-input-selector ng-model="item.type.model"
+                                               gi-form-control-text="::item.type.controltext"
+                                               gi-btn-click="vm.doClick(item.type.click)">
+                            </gi-input-selector>
+                        </gi-form-group-vertical>
+                    </span>
+                    <span ng-switch-when="datepicker">
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required">
+                            <gi-input-date gi-entity="vm.entity" gi-property="item.property" gi-required="::item.required" gi-options="item.type.options" gi-disabled="vm.disabled"></gi-input-date>
+                        </gi-form-group-vertical>
+                    </span>
+                    <span ng-switch-when="radio">
+                        <gi-form-group gi-label="{{::item.label}}" gi-label-cols="7" gi-input-cols="5">
+                            <gi-input-radio gi-entity="vm.entity" gi-property="item.property" gi-required="::item.required"></gi-input-radio>
+                        </gi-form-group>
+                    </span>
+                    <span ng-switch-when="lookuptext">
+                        <gi-form-group-vertical gi-label="{{::item.label}}" gi-required="::item.required">
+                            <gi-input-lookuptext gi-entity="vm.entity" gi-options="item.type.model" gi-property="item.property" gi-btn-click="vm.doClick(item.type.click)" gi-master="vm.entity"></gi-input-lookuptext>
+                        </gi-form-group-vertical>
+                    </span>
+                </span>
+            </span>
+        </div>
+    </div>
+</fieldset>
